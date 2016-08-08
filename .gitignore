@@ -1,0 +1,43 @@
+# git ignore file, used for ignoring files in git
+# all temporary files and files built by the solution should be included
+# here
+
+*.dll
+*.exe
+*.pdb
+.ssh/
+*.scc
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.schemaview
+*.dbmdl
+*.sqlcmdvars
+*.sqlpermissions
+*.sqlsettings
+*.sqldeployment
+*.exclude
+*.xsx
+*.xsc
+*.xss
+*.zip
+*.log
+*.log.*
+packages/
+_ReSharper.*/
+*.DotSettings
+*~
+*.swp
+*.tmp
+Settings/*dbsettings.bat
+Settings/*dbsettings.restore.bat
+ConnectionStrings.config
+AppSettings.config
+vwd.webinfo
+*.orig
+Sandbox/
+node_modules/
+bower_components/
+WebEssentials-Settings.json
+.vs/
