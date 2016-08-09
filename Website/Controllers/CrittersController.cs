@@ -15,6 +15,8 @@ namespace Website.Controllers
         [HttpGet]
         public IEnumerable<Critter> Get()
         {
+
+
             return Enumerable.Empty<Critter>();
         }
     }
