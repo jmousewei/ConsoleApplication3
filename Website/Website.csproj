@@ -203,7 +203,9 @@
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.0.0-beta3\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.0.0-beta3\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>copy /B /Y "$(SolutionDir)Resources\encrypt.dll" "$(TargetDir)encrypt.dll"</PostBuildEvent>
+    <PostBuildEvent>copy /B /Y "$(SolutionDir)Resources\encrypt.dll" "$(WebProjectOutputDir)\bin\encrypt.dll"
+if not exist "$(WebProjectOutputDir)\bin\Roslyn" md "$(WebProjectOutputDir)\bin\Roslyn"
+start /MIN xcopy /s /y /R "$(OutDir)roslyn\*.*" "$(WebProjectOutputDir)\bin\Roslyn"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
