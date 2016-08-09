@@ -3,6 +3,7 @@
 # here
 
 *.dll
+!Resources/*.dll
 *.exe
 *.pdb
 .ssh/

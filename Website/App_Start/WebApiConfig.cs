@@ -4,7 +4,12 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Dispatcher;
+using System.Web.Http.ExceptionHandling;
 using Newtonsoft.Json.Serialization;
+using Website.Controllers.Authentication;
+using Website.Controllers.ErrorHandling;
 
 namespace Website
 {
@@ -13,6 +18,10 @@ namespace Website
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.MessageHandlers.Add(new AuthenticateRequestHandler());
+            config.Services.Replace(typeof (IExceptionHandler), new OopsExceptionHandler());
+            config.Services.Replace(typeof (IHttpControllerSelector), new OopsControllerSelector(config));
+            config.Services.Replace(typeof (IHttpActionSelector), new OopsActionSelector());
 
             // Web API routes
             config.EnableCors();
@@ -25,8 +34,6 @@ namespace Website
                 );
 
             // All requests must come from trusted sources.
-            config.Filters.Add(new UniformErrorAttribute());
-            config.Filters.Add(new WebsiteCommon.Authorization.Http.AuthorizeAttribute());
             config.Filters.Add(new System.Web.Http.AuthorizeAttribute());
 
             // This is to make result shown as Json in Chrome as per:
@@ -36,7 +43,6 @@ namespace Website
             // https://frankapi.wordpress.com/2012/09/09/going-camelcase-in-asp-net-mvc-web-api/
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-
         }
     }
 }
