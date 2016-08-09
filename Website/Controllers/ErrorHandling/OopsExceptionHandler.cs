@@ -13,9 +13,16 @@ namespace Website.Controllers.ErrorHandling
     {
         public override void Handle(ExceptionHandlerContext context)
         {
-            var contentResult = new System.Web.Http.Results.BadRequestErrorMessageResult(context.Exception.ToString(),
-                (ApiController) context.ExceptionContext.ControllerContext.Controller);
-            context.Result = contentResult;
+            //var contentResult = new System.Web.Http.Results.BadRequestErrorMessageResult(context.Exception.ToString(),
+            //    (ApiController) context.ExceptionContext.ControllerContext.Controller);
+            //context.Result = contentResult;
+
+            if (context.Exception != null)
+            {
+                throw new Exception("Exception", context.Exception);
+            }
+
+            
         }
     }
 }
