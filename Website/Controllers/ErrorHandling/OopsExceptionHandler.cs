@@ -21,7 +21,7 @@ namespace Website.Controllers.ErrorHandling
             {
                 throw new Exception("Exception", context.Exception);
             }
-
+             
             
         }
     }
