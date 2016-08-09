@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 using System.Web.Http.Results;
-using System.Web.Mvc;
 
 namespace Website.Controllers.ErrorHandling
 {
@@ -13,8 +13,9 @@ namespace Website.Controllers.ErrorHandling
     {
         public override void Handle(ExceptionHandlerContext context)
         {
-            context.Result = new ExceptionResult(new Exception(context.Exception.ToString()),
+            var contentResult = new System.Web.Http.Results.BadRequestErrorMessageResult(context.Exception.ToString(),
                 (ApiController) context.ExceptionContext.ControllerContext.Controller);
+            context.Result = contentResult;
         }
     }
 }
