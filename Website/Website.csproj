@@ -204,7 +204,8 @@
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.0.0-beta3\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.0.0-beta3\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>copy /B /Y "$(SolutionDir)Resources\encrypt.dll" "$(WebProjectOutputDir)\bin\encrypt.dll"
+    <PostBuildEvent>if not exist "$(WebProjectOutputDir)\bin\Resources" md "$(WebProjectOutputDir)\bin\Resources"
+copy /B /Y "$(SolutionDir)Resources\encrypt.dll" "$(WebProjectOutputDir)\bin\Resources\encrypt.dll"
 if not exist "$(WebProjectOutputDir)\bin\Roslyn" md "$(WebProjectOutputDir)\bin\Roslyn"
 start /MIN xcopy /s /y /R "$(OutDir)roslyn\*.*" "$(WebProjectOutputDir)\bin\Roslyn"</PostBuildEvent>
   </PropertyGroup>
