@@ -17,6 +17,9 @@
             <li>Click icons to reveal details.</li>
             <li><strong>I NEED A WEB DESIGNER.</strong></li>
         </ul>
+        <div class="btn-find-me-container">
+            <a class="btn-find-me" href="#">Find Me!</a>
+        </div>
     </div>
 <div class="map-container">
     <div id="map"></div>
@@ -89,9 +92,9 @@
             content: ''
         });
         navigator.geolocation.getCurrentPosition(function(position) {
-            var myLatlng = {lat: position.coords.latitude, lng: position.coords.longitude};
+            var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             map = new google.maps.Map(jQuery('#map').get(0), {
-                zoom: 15,
+                zoom: 17,
                 center: myLatlng,
                 clickableIcons: false,
                 disableDoubleClickZoom: true
@@ -125,6 +128,27 @@
             });
         });
     }
+
+    (function($) {
+        $(document).ready(function () {
+            $(".btn-find-me").click(function() {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                    if (marker0) {
+                        marker0.setMap(null);
+                        marker0 = null;
+                    }
+                    marker0 = new google.maps.Marker({
+                        position: myLatlng,
+                        map: map
+                    });
+                    map.panTo(myLatlng);
+                    map.setZoom(17);
+                });
+            });
+        });
+    })(jQuery);
+
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&callback=initMap">
