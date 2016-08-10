@@ -35,8 +35,22 @@ namespace Website.Controllers.Authentication
                     var key = keyHosts[0];
                     var hosts = keyHosts[1].Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
 
-                    return hosts.Select(
-                        host => new KeyValuePair<string, Uri>(key, new UriBuilder(Uri.UriSchemeHttp, host).Uri));
+                    return hosts.SelectMany(
+                        host =>
+                        {
+                            var hostParts = host.Split(new[] {':'}, StringSplitOptions.RemoveEmptyEntries);
+                            var ub1 = hostParts.Length == 2
+                                ? new UriBuilder(Uri.UriSchemeHttp, hostParts[0], int.Parse(hostParts[1]))
+                                : new UriBuilder(Uri.UriSchemeHttp, hostParts[0]);
+                            var ub2 = hostParts.Length == 2
+                                ? new UriBuilder(Uri.UriSchemeHttps, hostParts[0], int.Parse(hostParts[1]))
+                                : new UriBuilder(Uri.UriSchemeHttps, hostParts[0]);
+                            return new[]
+                                   {
+                                       new KeyValuePair<string, Uri>(key, ub1.Uri),
+                                       new KeyValuePair<string, Uri>(key, ub2.Uri)
+                                   };
+                        });
                 })
                 .ToLookup(kvp => kvp.Key, kvp => kvp.Value, StringComparer.Ordinal);
         }

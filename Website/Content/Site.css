@@ -1,17 +1,21 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+#map {
+    height: 100%;
 }
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+body {
+    font-family: 'Work Sans', sans-serif;
+}
+.help {
+    width: 200px;
+    display: block;
+    float: left;
+}
+.map-container {
+    height: 100%;
+    margin-left: 230px;
+    display: block;
 }

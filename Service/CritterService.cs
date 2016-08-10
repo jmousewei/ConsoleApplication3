@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Google.Common.Geometry;
+using PokemonGo.RocketAPI;
 using POGOProtos.Enums;
 using Website.Service.Models;
 
@@ -49,32 +50,27 @@ namespace Website.Service
                 PokemonId.Zubat
             };
 
-        public async Task<IEnumerable<Critter>> GetWildPokemons(double lat, double lng, int level = 15)
+        public async Task<IEnumerable<Critter>> GetWildPokemons(double lat, double lng)
         {
-            if (level < 1 || level > 30)
+            //-43.410237, 172.805990
+            //-43.610216, 172.418190
+            var topRight = S2LatLng.FromDegrees(-43.410237, 172.805990);
+            var bottomLeft = S2LatLng.FromDegrees(-43.610216, 172.418190);
+            var rect = new S2LatLngRect(bottomLeft, topRight);
+            var latLng = S2LatLng.FromDegrees(lat, lng);
+
+            if (!rect.Contains(latLng))
             {
-                level = 15;
+                // Out of range.
+                return Enumerable.Empty<Critter>();
             }
 
-            var latLng = S2LatLng.FromDegrees(lat, lng);
-            var s2CellId = S2CellId.FromLatLng(latLng).ParentForLevel(level);
-            var cellCenter = s2CellId.ToLatLng();
             var client = PokemonGoApiHack.GetClient();
             await client.Login.DoLogin();
-
-            await client.Player.UpdatePlayerLocation(cellCenter.LatDegrees, cellCenter.LngDegrees, 0d);
+            await client.Player.UpdatePlayerLocation(lat, lng, 0d);
             var mapObjs = await client.Map.GetMapObjects();
-            var wildPokemons = mapObjs.Item1.MapCells.SelectMany(x => x.WildPokemons)
-                .Where(p => !Pests.Contains(p.PokemonData.PokemonId))
-                .Select(
-                    p =>
-                        new Critter
-                        {
-                            Name = p.PokemonData.PokemonId.ToString(),
-                            Lat = p.Latitude,
-                            Lng = p.Longitude,
-                            TimeTillHidden = TimeSpan.FromMilliseconds(p.TimeTillHiddenMs)
-                        });
+            var approxNow = DateTime.Now;
+            var theBeginning = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
             //var test = mapObjs.Item1.MapCells.SelectMany(x => x.WildPokemons).FirstOrDefault();
             //if (test != null)
@@ -83,6 +79,29 @@ namespace Website.Service
             //    await client.Player.UpdatePlayerLocation(test.Latitude, test.Longitude, 0d);
             //    var result = await client.Encounter.EncounterPokemon(test.EncounterId, test.SpawnPointId);
             //}
+
+            var wildPokemons =
+                mapObjs.Item1.MapCells.SelectMany(x => x.CatchablePokemons)
+                    .Select(x =>
+                            {
+                                var timeTillHidden = x.ExpirationTimestampMs < 0
+                                    ? TimeSpan.Zero
+                                    : theBeginning.AddMilliseconds(x.ExpirationTimestampMs).ToLocalTime() -
+                                      approxNow;
+
+                                return new Critter
+                                       {
+                                           Name = x.PokemonId.ToString(),
+                                           Lat = x.Latitude,
+                                           Lng = x.Longitude,
+                                           TimeTillHidden = timeTillHidden,
+                                           TimeTillHiddenString =
+                                               timeTillHidden == TimeSpan.Zero
+                                                   ? "unknown"
+                                                   : string.Format("{0:mm}:{0:ss}", timeTillHidden)
+                                       };
+                            })
+                    .ToList();
 
             return wildPokemons;
         }

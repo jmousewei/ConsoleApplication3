@@ -9,6 +9,7 @@ namespace Website.Service.Models
         public double Lat { get; set; }
         public double Lng { get; set; }
         public TimeSpan TimeTillHidden { get; set; }
+        public string TimeTillHiddenString { get; set; }
     }
 
     public class CritterIV

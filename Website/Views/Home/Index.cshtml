@@ -1,24 +1,135 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>ConsoleApplication 3</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/Content/js/notify.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+    <link href="/Content/Site.css" rel="stylesheet">
+</head>
+<body>
+    <div class="help">
+        <ul>
+            <li>Double click to scan.</li>
+            <li>Scan in every 10 seconds.</li>
+            <li>Click icons to reveal details.</li>
+            <li><strong>I NEED A WEB DESIGNER.</strong></li>
+        </ul>
+    </div>
+<div class="map-container">
+    <div id="map"></div>
 </div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+<script>
+    var map;
+    var marker0;
+    var markersArray = [];
+    var infowindow;
+    var timeout;
+    var timeout2;
+
+    function getCritters(location) {
+        $.notify("We're working hard...", 'info');
+        jQuery.ajax(
+                {
+                    url: '/api/critters/@@' + location.lat() + ',' + location.lng() + '/',
+                    beforeSend: function(request) {
+                        request.setRequestHeader('x-consoleapplication3-key', 'aa4370a26e404b6e99291cedbbc3d551');
+                    }
+                })
+            .done(function (data) {
+                $.notify('Operation finished. Found ' + data.length + ' catchable pokemons.', 'success');
+                clearTimeout(timeout2);
+                timeout2 = setTimeout(function() {
+                    clearTimeout(timeout2);
+                    timeout2 = null;
+                }, 10000);
+                console.log(data);
+                for (var i in data) {
+                    var description = data[i].name + ' @@ ' + data[i].lat + ',' + data[i].lng + ' ' + data[i].timeTillHidden;
+                    var descriptionHtml = '<strong>' + data[i].name + '</strong> despawns in <strong>' + data[i].timeTillHiddenString + '</strong>';
+                    console.log(description);
+                    var latLng = {lat: data[i].lat, lng: data[i].lng};
+                    placeMarker(latLng, {url: '/resources/icon/' + data[i].name, category: data[i].name, title: data[i].name, description: descriptionHtml});
+                }
+            })
+            .fail(function() {
+                $.notify('Failed.', 'error');
+            });
+    }
+
+    function placeMarker(location, icon) {
+        if (!icon) {
+            icon = {};
+        }
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            icon: icon.url,
+            category: icon.category,
+            title: icon.title
+        });
+        markersArray.push(marker);
+
+        if (icon.description) {
+            // Marker click listener
+            google.maps.event.addListener(marker, 'click', (function(marker, content) {
+                return function() {
+                    infowindow.setContent(content);
+                    infowindow.open(map, marker);
+                }
+            })(marker, icon.description));
+        }
+    }
+
+    function initMap() {
+        infowindow = new google.maps.InfoWindow({
+            content: ''
+        });
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var myLatlng = {lat: position.coords.latitude, lng: position.coords.longitude};
+            map = new google.maps.Map(jQuery('#map').get(0), {
+                zoom: 15,
+                center: myLatlng,
+                clickableIcons: false,
+                disableDoubleClickZoom: true
+            });
+            marker0 = new google.maps.Marker({
+                position: myLatlng,
+                map: map
+            });
+            google.maps.event.addListener(map, 'click', function(event) {
+                marker0.setMap(null);
+                marker0 = new google.maps.Marker({
+                    position: event.latLng,
+                    map: map
+                });
+            });
+            google.maps.event.addListener(map, 'dblclick', function(event) {
+                if (timeout2) {
+                    $.notify('Keep calm and come back in 10 seconds.', 'info');
+                    return;
+                }
+                clearTimeout(timeout);
+                timeout = setTimeout(function() {
+                    if (markersArray) {
+                        for (i in markersArray) {
+                            markersArray[i].setMap(null);
+                        }
+                        markersArray.length = 0;
+                    }
+                    getCritters(event.latLng);
+                }, 500);
+            });
+        });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&callback=initMap">
+
+
+</script>
+</body>
+</html>

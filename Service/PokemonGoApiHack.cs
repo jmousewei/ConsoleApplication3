@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Extensions;
+using POGOProtos.Enums;
 using POGOProtos.Networking.Envelopes;
 
 namespace Website.Service
@@ -31,6 +32,16 @@ namespace Website.Service
         public static Client GetClient()
         {
             return new Client(Settings, new MyStrategy());
+        }
+
+        public static int GetPokemonId(string name)
+        {
+            PokemonId pkId;
+            if (Enum.TryParse(name, true, out pkId) && pkId != PokemonId.Missingno)
+            {
+                return (int) pkId;
+            }
+            return -1;
         }
 
         private static MySettings SetDeviceInfo(MySettings mySettings)

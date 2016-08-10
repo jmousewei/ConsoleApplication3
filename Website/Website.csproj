@@ -143,6 +143,158 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\icons\001.png" />
+    <Content Include="Content\icons\002.png" />
+    <Content Include="Content\icons\003.png" />
+    <Content Include="Content\icons\004.png" />
+    <Content Include="Content\icons\005.png" />
+    <Content Include="Content\icons\006.png" />
+    <Content Include="Content\icons\007.png" />
+    <Content Include="Content\icons\008.png" />
+    <Content Include="Content\icons\009.png" />
+    <Content Include="Content\icons\010.png" />
+    <Content Include="Content\icons\011.png" />
+    <Content Include="Content\icons\012.png" />
+    <Content Include="Content\icons\013.png" />
+    <Content Include="Content\icons\014.png" />
+    <Content Include="Content\icons\015.png" />
+    <Content Include="Content\icons\016.png" />
+    <Content Include="Content\icons\017.png" />
+    <Content Include="Content\icons\018.png" />
+    <Content Include="Content\icons\019.png" />
+    <Content Include="Content\icons\020.png" />
+    <Content Include="Content\icons\021.png" />
+    <Content Include="Content\icons\022.png" />
+    <Content Include="Content\icons\023.png" />
+    <Content Include="Content\icons\024.png" />
+    <Content Include="Content\icons\025.png" />
+    <Content Include="Content\icons\026.png" />
+    <Content Include="Content\icons\027.png" />
+    <Content Include="Content\icons\028.png" />
+    <Content Include="Content\icons\029.png" />
+    <Content Include="Content\icons\030.png" />
+    <Content Include="Content\icons\031.png" />
+    <Content Include="Content\icons\032.png" />
+    <Content Include="Content\icons\033.png" />
+    <Content Include="Content\icons\034.png" />
+    <Content Include="Content\icons\035.png" />
+    <Content Include="Content\icons\036.png" />
+    <Content Include="Content\icons\037.png" />
+    <Content Include="Content\icons\038.png" />
+    <Content Include="Content\icons\039.png" />
+    <Content Include="Content\icons\040.png" />
+    <Content Include="Content\icons\041.png" />
+    <Content Include="Content\icons\042.png" />
+    <Content Include="Content\icons\043.png" />
+    <Content Include="Content\icons\044.png" />
+    <Content Include="Content\icons\045.png" />
+    <Content Include="Content\icons\046.png" />
+    <Content Include="Content\icons\047.png" />
+    <Content Include="Content\icons\048.png" />
+    <Content Include="Content\icons\049.png" />
+    <Content Include="Content\icons\050.png" />
+    <Content Include="Content\icons\051.png" />
+    <Content Include="Content\icons\052.png" />
+    <Content Include="Content\icons\053.png" />
+    <Content Include="Content\icons\054.png" />
+    <Content Include="Content\icons\055.png" />
+    <Content Include="Content\icons\056.png" />
+    <Content Include="Content\icons\057.png" />
+    <Content Include="Content\icons\058.png" />
+    <Content Include="Content\icons\059.png" />
+    <Content Include="Content\icons\060.png" />
+    <Content Include="Content\icons\061.png" />
+    <Content Include="Content\icons\062.png" />
+    <Content Include="Content\icons\063.png" />
+    <Content Include="Content\icons\064.png" />
+    <Content Include="Content\icons\065.png" />
+    <Content Include="Content\icons\066.png" />
+    <Content Include="Content\icons\067.png" />
+    <Content Include="Content\icons\068.png" />
+    <Content Include="Content\icons\069.png" />
+    <Content Include="Content\icons\070.png" />
+    <Content Include="Content\icons\071.png" />
+    <Content Include="Content\icons\072.png" />
+    <Content Include="Content\icons\073.png" />
+    <Content Include="Content\icons\074.png" />
+    <Content Include="Content\icons\075.png" />
+    <Content Include="Content\icons\076.png" />
+    <Content Include="Content\icons\077.png" />
+    <Content Include="Content\icons\078.png" />
+    <Content Include="Content\icons\079.png" />
+    <Content Include="Content\icons\080.png" />
+    <Content Include="Content\icons\081.png" />
+    <Content Include="Content\icons\082.png" />
+    <Content Include="Content\icons\083.png" />
+    <Content Include="Content\icons\084.png" />
+    <Content Include="Content\icons\085.png" />
+    <Content Include="Content\icons\086.png" />
+    <Content Include="Content\icons\087.png" />
+    <Content Include="Content\icons\088.png" />
+    <Content Include="Content\icons\089.png" />
+    <Content Include="Content\icons\090.png" />
+    <Content Include="Content\icons\091.png" />
+    <Content Include="Content\icons\092.png" />
+    <Content Include="Content\icons\093.png" />
+    <Content Include="Content\icons\094.png" />
+    <Content Include="Content\icons\095.png" />
+    <Content Include="Content\icons\096.png" />
+    <Content Include="Content\icons\097.png" />
+    <Content Include="Content\icons\098.png" />
+    <Content Include="Content\icons\099.png" />
+    <Content Include="Content\icons\100.png" />
+    <Content Include="Content\icons\101.png" />
+    <Content Include="Content\icons\102.png" />
+    <Content Include="Content\icons\103.png" />
+    <Content Include="Content\icons\104.png" />
+    <Content Include="Content\icons\105.png" />
+    <Content Include="Content\icons\106.png" />
+    <Content Include="Content\icons\107.png" />
+    <Content Include="Content\icons\108.png" />
+    <Content Include="Content\icons\109.png" />
+    <Content Include="Content\icons\110.png" />
+    <Content Include="Content\icons\111.png" />
+    <Content Include="Content\icons\112.png" />
+    <Content Include="Content\icons\113.png" />
+    <Content Include="Content\icons\114.png" />
+    <Content Include="Content\icons\115.png" />
+    <Content Include="Content\icons\116.png" />
+    <Content Include="Content\icons\117.png" />
+    <Content Include="Content\icons\118.png" />
+    <Content Include="Content\icons\119.png" />
+    <Content Include="Content\icons\120.png" />
+    <Content Include="Content\icons\121.png" />
+    <Content Include="Content\icons\122.png" />
+    <Content Include="Content\icons\123.png" />
+    <Content Include="Content\icons\124.png" />
+    <Content Include="Content\icons\125.png" />
+    <Content Include="Content\icons\126.png" />
+    <Content Include="Content\icons\127.png" />
+    <Content Include="Content\icons\128.png" />
+    <Content Include="Content\icons\129.png" />
+    <Content Include="Content\icons\130.png" />
+    <Content Include="Content\icons\131.png" />
+    <Content Include="Content\icons\132.png" />
+    <Content Include="Content\icons\133.png" />
+    <Content Include="Content\icons\134.png" />
+    <Content Include="Content\icons\135.png" />
+    <Content Include="Content\icons\136.png" />
+    <Content Include="Content\icons\137.png" />
+    <Content Include="Content\icons\138.png" />
+    <Content Include="Content\icons\139.png" />
+    <Content Include="Content\icons\140.png" />
+    <Content Include="Content\icons\141.png" />
+    <Content Include="Content\icons\142.png" />
+    <Content Include="Content\icons\143.png" />
+    <Content Include="Content\icons\144.png" />
+    <Content Include="Content\icons\145.png" />
+    <Content Include="Content\icons\146.png" />
+    <Content Include="Content\icons\147.png" />
+    <Content Include="Content\icons\148.png" />
+    <Content Include="Content\icons\149.png" />
+    <Content Include="Content\icons\150.png" />
+    <Content Include="Content\icons\151.png" />
+    <Content Include="Content\js\notify.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
@@ -204,10 +356,12 @@
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.0.0-beta3\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.0.0-beta3\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>if not exist "$(WebProjectOutputDir)\bin\Resources" md "$(WebProjectOutputDir)\bin\Resources"
-copy /B /Y "$(SolutionDir)Resources\encrypt.dll" "$(WebProjectOutputDir)\bin\Resources\encrypt.dll"
-if not exist "$(WebProjectOutputDir)\bin\Roslyn" md "$(WebProjectOutputDir)\bin\Roslyn"
+    <PostBuildEvent>if not exist "$(WebProjectOutputDir)\bin\Roslyn" md "$(WebProjectOutputDir)\bin\Roslyn"
 start /MIN xcopy /s /y /R "$(OutDir)roslyn\*.*" "$(WebProjectOutputDir)\bin\Roslyn"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>if not exist "$(WebProjectOutputDir)\bin\Resources" md "$(WebProjectOutputDir)\bin\Resources"
+copy /B /Y "$(SolutionDir)Resources\encrypt.dll" "$(WebProjectOutputDir)\bin\Resources\encrypt.dll"</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -13,7 +13,7 @@ namespace Website.Controllers
     [RoutePrefix("api/critters")]
     public class CrittersController : ApiController
     {
-        [Route("@{lat:double},{lng:double},{level:int}")]
+        [Route("@{lat:double},{lng:double}")]
         [HttpGet]
         public async Task<IEnumerable<Critter>> Get(double lat, double lng)
         {
