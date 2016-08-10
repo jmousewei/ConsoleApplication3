@@ -44,11 +44,15 @@
                 })
             .done(function (data) {
                 $.notify('Operation finished. Found ' + data.length + ' catchable pokemons.', 'success');
+                var interval = 10000;
+                if (window.location.hash === '#no-wait') {
+                    interval = 0;
+                }
                 clearTimeout(timeout2);
                 timeout2 = setTimeout(function() {
                     clearTimeout(timeout2);
                     timeout2 = null;
-                }, 10000);
+                }, interval);
                 console.log(data);
                 for (var i in data) {
                     var description = data[i].name + ' @@ ' + data[i].lat + ',' + data[i].lng + ' ' + data[i].timeTillHidden;
