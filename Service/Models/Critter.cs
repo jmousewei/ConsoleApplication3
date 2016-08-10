@@ -10,6 +10,7 @@ namespace Website.Service.Models
         public double Lng { get; set; }
         public TimeSpan TimeTillHidden { get; set; }
         public string TimeTillHiddenString { get; set; }
+        public DateTime ServerTime { get; set; }
     }
 
     public class CritterIV

@@ -98,7 +98,8 @@ namespace Website.Service
                                            TimeTillHiddenString =
                                                timeTillHidden == TimeSpan.Zero
                                                    ? "unknown"
-                                                   : string.Format("{0:mm}:{0:ss}", timeTillHidden)
+                                                   : string.Format("{0:mm}:{0:ss}", timeTillHidden),
+                                           ServerTime = approxNow.ToUniversalTime()
                                        };
                             })
                     .ToList();
